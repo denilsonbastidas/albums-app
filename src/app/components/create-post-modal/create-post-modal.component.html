@@ -1,0 +1,67 @@
+<h2 mat-dialog-title>Crear Nueva Publicacion</h2>
+<form (ngSubmit)="onSubmit()" #postForm="ngForm" class="space-y-4 p-4">
+  <mat-form-field appearance="fill" class="w-full" ngModelGroup="nameGroup">
+    <mat-label>Nombre</mat-label>
+    <input matInput [(ngModel)]="post.name" name="name" required />
+  </mat-form-field>
+
+  <!-- <div class="w-full">
+    <label class="block text-gray-700 text-sm font-bold mb-2" for="cover">
+      Imagen
+    </label>
+    <input 
+      type="file"
+      id="cover"
+      (change)="onFileSelected($event)"
+      accept="image/*"
+      class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+    />
+  </div> -->
+  
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Fecha de lanzamiento</mat-label>
+    <input
+      matInput
+      type="date"
+      [(ngModel)]="post.releaseDate"
+      name="releaseDate"
+      required
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Descripción</mat-label>
+    <textarea
+      matInput
+      rows="3"
+      [(ngModel)]="post.description"
+      name="description"
+      required
+    ></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Género</mat-label>
+    <mat-select [(ngModel)]="post.genre" name="genre" required>
+        @for (genre of genres; track genre) {
+            <mat-option [value]="genre">{{genre}}</mat-option>
+          }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Disquera</mat-label>
+    <mat-select [(ngModel)]="post.recordLabel" name="recordLabel" required>
+        @for (recordLabel of recordLabels; track recordLabels) {
+            <mat-option [value]="recordLabel">{{recordLabel}}</mat-option>
+          }
+    </mat-select>
+  </mat-form-field>
+
+  <div class="flex justify-end space-x-4">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="postForm.invalid">
+      Guardar
+    </button>
+  </div>
+</form>
